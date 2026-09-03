@@ -1,14 +1,25 @@
 FROM python:3.12-slim
 
-# GDAL runtime libraries for rasterio wheels + build essentials for psycopg2 fallback
+# GDAL headers are required on Apple Silicon (aarch64) where rasterio
+# may compile from source instead of using a prebuilt wheel.
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    gdal-bin libexpat1 curl \
+    gdal-bin \
+    libgdal-dev \
+    gcc \
+    g++ \
+    curl \
+    libexpat1 \
     && rm -rf /var/lib/apt/lists/*
+
+ENV GDAL_CONFIG=/usr/bin/gdal-config \
+    CPLUS_INCLUDE_PATH=/usr/include/gdal \
+    C_INCLUDE_PATH=/usr/include/gdal
 
 WORKDIR /app
 
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir --upgrade pip \
+    && pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
