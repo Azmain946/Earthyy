@@ -1,0 +1,49 @@
+# Earthyy backend dependencies — every entry has a purpose (see README "Architecture").
+
+# API framework
+fastapi==0.115.12
+uvicorn[standard]==0.34.2
+python-multipart==0.0.20
+
+# Auth
+pyjwt==2.10.1
+passlib[bcrypt]==1.7.4
+bcrypt==4.2.1
+
+# Settings / validation
+pydantic==2.11.4
+pydantic-settings==2.9.1
+
+# Database (PostgreSQL + PostGIS)
+sqlalchemy==2.0.41
+geoalchemy2==0.17.1
+psycopg2-binary==2.9.10
+alembic==1.15.2
+
+# Background jobs
+redis==5.2.1
+rq==2.3.2
+
+# Satellite catalogue access (STAC)
+pystac-client==0.8.6
+planetary-computer==1.0.0
+
+# Geospatial processing
+rasterio==1.4.3
+shapely==2.1.0
+pyproj==3.7.1
+numpy==2.2.5
+scipy==1.15.3
+
+# Raster preview rendering
+Pillow==11.2.1
+
+# Reports
+reportlab==4.4.0
+
+# HTTP
+requests==2.32.3
+
+# Tests
+pytest==8.3.5
+httpx==0.28.1
